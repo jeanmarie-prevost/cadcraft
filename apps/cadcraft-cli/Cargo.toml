@@ -1,6 +1,6 @@
 [package]
 name = "cadcraft-cli"
-description = "CADCraft command-line tool: info, convert, run scripts, export, commands, MCP server"
+description = "CADCraft command-line tool: info, convert, run scripts, export, commands, MCP server, point cloud conversion"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -13,5 +13,6 @@ workspace = true
 cadcraft-engine = { workspace = true }
 cadcraft-io = { workspace = true }
 cadcraft-mcp = { workspace = true }
+cadcraft-pointcloud = { workspace = true }
 cadcraft-render = { workspace = true }
 serde_json = { workspace = true }

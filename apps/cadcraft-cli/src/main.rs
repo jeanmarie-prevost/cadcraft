@@ -9,6 +9,7 @@
 //! cadcraft-cli perf [N]                            timing table on a synthetic N-entity drawing
 //! cadcraft-cli perf FILE                           canvas display-list build of a drawing, zoomed in step by step
 //! cadcraft-cli sample (bracket|floorplan) OUT       write a built-in sample drawing
+//! cadcraft-cli pointcloud (info|convert) ...        point clouds: E57, LAS/LAZ, PTS, XYZ, PLY
 //! ```
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
@@ -25,6 +26,8 @@ macro_rules! outln {
         }
     }};
 }
+
+mod pointcloud;
 
 use std::process::ExitCode;
 
@@ -63,6 +66,7 @@ const USAGE: &str = "usage:
   cadcraft-cli mcp [--connect HOST:PORT [--lazy] [--launch]]
   cadcraft-cli perf [N | FILE]
   cadcraft-cli sample (bracket|floorplan) OUT.(dxf|dwg|svg|png)
+  cadcraft-cli pointcloud (info|convert) ...   (pointcloud --help for details)
   cadcraft-cli --version
 
 image framing (png 2400x1600, svg, pdf; always model space):
@@ -839,6 +843,7 @@ fn cli() -> ExitCode {
             outln!("{}", serde_json::to_string_pretty(&v).unwrap_or_default());
         }),
         Some("mcp") => mcp(&rest),
+        Some("pointcloud") => pointcloud::run(&rest),
         Some("--version" | "-V") => {
             outln!("cadcraft-cli {}", env!("CARGO_PKG_VERSION"));
             Ok(())

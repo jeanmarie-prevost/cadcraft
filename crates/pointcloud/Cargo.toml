@@ -1,0 +1,16 @@
+[package]
+name = "cadcraft-pointcloud"
+description = "Point cloud reading and writing (E57, LAS/LAZ, PTS, XYZ, PLY) and format conversion"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+serde = { workspace = true }
+e57 = "0.11.13"
+las = { version = "0.11.2", features = ["laz"] }
